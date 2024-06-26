@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSLS - Analysis</title>
+    <link rel="stylesheet" href="../static/style_a.css">
+    <script src="../static/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body class="analysis">
+
+    <div class="container">
+
+        <div class="header">
+            <nav>
+                <div class="nav-left">
+                    <h1>Smart Street Light System</h1>
+                </div>
+                <div class="nav-right">
+                    <button><a href="{{ url_for('index') }}">Home</a></button>
+                    <button><a href="{{ url_for('documentation') }}">Documentation</a></button>
+                </div>
+            </nav>
+        </div>
+
+        <div class="a-main">
+
+            <div class="chart">
+                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        fetch('/chart_data')
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);  // Log the data to verify it contains both 'a' and 'b'
+                                const xValues = ["Automated", "Manual"];
+                                const yValues = [data.a, data.b];
+                                const barColors = ["Green", "Brown"];
+    
+                                new Chart("myChart", {
+                                    type: "bar",
+                                    data: {
+                                        labels: xValues,
+                                        datasets: [{
+                                            backgroundColor: barColors,
+                                            data: yValues
+                                        }]
+                                    },
+                                    options: {
+                                        legend: { display: false },
+                                        title: {
+                                            display: true,
+                                            text: "Comparison of Automated and Manual Systems"
+                                        }
+                                    }
+                                });
+
+                                // Calculate the difference
+                                const difference = (data.b - data.a) + "%";
+                                
+                                // Insert the values into the HTML
+                                document.getElementById('difference').textContent = difference;
+                            })
+                            .catch(error => console.error('Error fetching chart data:', error));
+                    });
+                </script>
+                    
+            </div>
+
+            <div class="data">
+                <p class="chart-p">Based on the chart, if all street lights were switched to automatic mode, it would use 
+                    <span id="difference" class="per"></span> less electricity than running all the lights in manual mode. This is because automatic systems can turn 
+                    off lights when they are not needed, such as during the day or when there is no motion detected. Less electricity 
+                    consumption means less reliance on power plants, which can help reduce greenhouse gas emissions and air pollution.
+                </p>
+            </div>
+            
+
+        </div>
+
+        <div class="footer">
+            <footer>
+                <p>&copy; 2024 Smart Street Light System (SSLS) (O6U). All rights reserved.</p>
+            </footer>
+        </div>
+
+    </div>
+
+</body>
+</html>

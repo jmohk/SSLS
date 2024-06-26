@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSLS - Home</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="../static/script.js" defer></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <nav>
+                <div class="nav-left">
+                    <h1>Smart Street Light System</h1>
+                </div>
+                <div class="nav-right">
+                    <button><a href="{{ url_for('analysis') }}">Analysis</a></button>
+                    <button><a href="{{ url_for('documentation') }}">Documentation</a></button>
+                </div>
+            </nav>
+        </div>
+
+        <div class="main">
+            
+            <form id="prediction-form" class="form-1" action="#" method="post">
+
+                <label>Month: </label>
+                <select id="month" name="month">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select><br>
+
+                <label>Hour: </label>
+                <input type="text" id="hour" name="hour">
+                <select id="am-pm" name="am-pm" class="am-pm-select">
+                    <option value="1">AM</option>
+                    <option value="2">PM</option>
+                </select><br>
+
+                <label>Rain: </label>
+                <button type="button" class="r-b-l" onclick="changeValue('rain', -1)">-</button>
+                <input class="r-i" type="text" id="rain" name="rain" value="0">
+                <button type="button" class="r-b-r" onclick="changeValue('rain', 1)">+</button><br>
+
+                <label>Fog: </label>
+                <button type="button" class="f-b-l" onclick="changeValue('fog', -1)">-</button>
+                <input class="f-i" type="text" id="fog" name="fog" value="0">
+                <button type="button" class="f-b-r" onclick="changeValue('fog', 1)">+</button><br>
+
+                <button type="button" class="c-b">Scan number of cars</button>
+                <input class="c-r" type="text" value="Run the camera" readonly><br><br><br><br>
+
+                <button class="p-b" type="submit">Predict</button>
+
+            </form>
+
+            <div>
+                <label class="m-c">Automated</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggleSwitch">
+                    <span class="slider round"></span>
+                </label>
+                <label class="m-c">Manual</label>
+            </div>
+
+            <form class="form-2" action="#" method="post">
+                <label>Month: </label>
+                <select id="month2" name="cars">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select><br>
+
+                <label>Hour: </label>
+                <input type="text" id="hour2" name="hour">
+                <select id="am-pm2" name="am-pm" class="am-pm-select">
+                    <option value="1">AM</option>
+                    <option value="2">PM</option>
+                </select><br><br><br>
+
+                <button class="p-b" type="submit">Run</button>
+
+            </form>
+
+        </div>
+
+        <div class="footer">
+            <footer>
+                <p>&copy; 2024 Smart Street Light System (SSLS) (O6U). All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>
